@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제6공화국 운전면허시험 - 실기시험 센터</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#1a5fb4',
+                        secondary: '#2c3e50',
+                        neutral: '#f8fafc',
+                        success: '#10b981',
+                        danger: '#ef4444',
+                        warning: '#f59e0b'
+                    },
+                    fontFamily: {
+                        sans: ['Noto Sans KR', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .shadow-subtle {
+                box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+            }
+            .border-fade {
+                border-color: rgba(0,0,0,0.06);
+            }
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="bg-white text-gray-800 font-sans min-h-screen flex flex-col">
+    <!-- 네비게이션 -->
+    <header class="sticky top-0 bg-white border-b border-fade z-50 shadow-subtle">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center py-4">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                        <i class="fa fa-car text-primary text-xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="text-lg font-semibold text-secondary">제6공화국 운전면허시험</h1>
+                        <p class="text-xs text-gray-500">실기시험 전용 운영센터</p>
+                    </div>
+                </div>
+                
+                <nav class="hidden md:flex items-center space-x-8 text-sm">
+                    <a href="#home" class="text-gray-700 hover:text-primary transition-colors">홈</a>
+                    <a href="#license" class="text-gray-700 hover:text-primary transition-colors">면허종류</a>
+                    <a href="#apply" class="text-gray-700 hover:text-primary transition-colors">시험신청</a>
+                    <a href="#guide" class="text-gray-700 hover:text-primary transition-colors">시험안내</a>
+                    <a href="#result" class="text-gray-700 hover:text-primary transition-colors">결과조회</a>
+                </nav>
+                
+                <div id="auth-area" class="flex items-center space-x-3">
+                    <button id="login-btn" class="px-4 py-2 bg-primary text-white rounded-md text-sm font-medium hover:bg-primary/90 transition-colors">
+                        <i class="fa fa-sign-in mr-1"></i> 로블록스 로그인
+                    </button>
+                </div>
+
+                <button class="md:hidden text-gray-700" id="mobile-menu-btn">
+                    <i class="fa fa-bars text-lg"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- 모바일 메뉴 -->
+        <div id="mobile-menu" class="hidden md:hidden border-t border-fade">
+            <div class="px-4 py-3 space-y-3 text-sm">
+                <a href="#home" class="block py-2 text-gray-700">홈</a>
+                <a href="#license" class="block py-2 text-gray-700">면허종류</a>
+                <a href="#apply" class="block py-2 text-gray-700">시험신청</a>
+                <a href="#guide" class="block py-2 text-gray-700">시험안내</a>
+                <a href="#result" class="block py-2 text-gray-700">결과조회</a>
+                <a href="#admin" id="mobile-admin-link" class="hidden block py-2 text-primary font-medium">관리자페이지</a>
+                <a href="#examiner" id="mobile-examiner-link" class="hidden block py-2 text-primary font-medium">시험관페이지</a>
+            </div>
+        </div>
+    </header>
+
+    <!-- 메인 콘텐츠 -->
+    <main class="flex-grow">
+        <!-- 홈 섹션 -->
+        <section id="home" class="py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-[clamp(1.8rem,4vw,2.8rem)] font-bold text-secondary mb-4">실기시험 안내 및 운영 시스템</h2>
+                    <p class="text-gray-500 max-w-2xl mx-auto">제6공화국 운전면허 실기시험 공식 사이트입니다. 시험신청부터 결과확인까지 한번에 처리하실 수 있습니다.</p>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6 mb-16">
+                    <div class="bg-neutral rounded-xl p-6 border border-fade hover:shadow-md transition-shadow">
+                        <div class="w-12 h-12 rounded-lg bg-primary/10 flex items-center justify-center mb-4">
+                            <i class="fa fa-file-text-o text-primary text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">시험신청</h3>
+                        <p class="text-sm text-gray-500 mb-4">원하시는 면허 종류를 선택하고 실기시험을 신청하세요.</p>
+                        <button onclick="scrollToSection('apply')" class="text-primary text-sm font-medium hover:underline">신청하기 <i class="fa fa-chevron-right text-xs ml-1"></i></button>
+                    </div>
+                    <div class="bg-neutral rounded-xl p-6 border border-fade hover:shadow-md transition-shadow">
+                        <div class="w-12 h-12 rounded-lg bg-success/10 flex items-center justify-center mb-4">
+                            <i class="fa fa-list-alt text-success text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">시험안내</h3>
+                        <p class="text-sm text-gray-500 mb-4">실기시험 절차와 채점 기준을 확인하실 수 있습니다.</p>
+                        <button onclick="scrollToSection('guide')" class="text-primary text-sm font-medium hover:underline">안내보기 <i class="fa fa-chevron-right text-xs ml-1"></i></button>
+                    </div>
+                    <div class="bg-neutral rounded-xl p-6 border border-fade hover:shadow-md transition-shadow">
+                        <div class="w-12 h-12 rounded-lg bg-warning/10 flex items-center justify-center mb-4">
+                            <i class="fa fa-check-square-o text-warning text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-semibold mb-2">결과조회</h3>
+                        <p class="text-sm text-gray-500 mb-4">시험 후 합격·불합격 결과를 확인하실 수 있습니다.</p>
+                        <button onclick="scrollToSection('result')" class="text-primary text-sm font-medium hover:underline">조회하기 <i class="fa fa-chevron-right text-xs ml-1"></i></button>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-primary/5 to-primary/10 rounded-2xl p-8 border border-primary/10">
+                    <div class="grid md:grid-cols-2 gap-8 items-center">
+                        <div>
+                            <h3 class="text-xl font-semibold mb-3">실기시험이란?</h3>
+                            <p class="text-gray-600 text-sm leading-relaxed mb-4">도로주행 및 기본 조작 능력을 평가하는 시험으로, 제6공화국에서 발급하는 운전면허 취득을 위해 반드시 통과해야 하는 시험입니다. 시험관의 지도에 따라 절차를 수행하시면 됩니다.</p>
+                            <ul class="space-y-2 text-sm text-gray-600">
+                                <li class="flex items-center"><i class="fa fa-check text-success mr-2"></i> 안전운전 능력 평가</li>
+                                <li class="flex items-center"><i class="fa fa-check text-success mr-2"></i> 차량 조작 및 규정 준수 확인</li>
+                                <li class="flex items-center"><i class="fa fa-check text-success mr-2"></i> 시험관의 직접 평가 진행</li>
+                            </ul>
+                        </div>
+                        <div class="text-center">
+                            <img src="https://picsum.photos/id/1072/500/300" alt="운전면허 실기시험" class="rounded-lg shadow-md w-full h-auto object-cover">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 면허 종류 -->
+        <section id="license" class="py-16 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-2xl font-bold text-secondary mb-3">운전면허 종류</h2>
+                    <p class="text-gray-500">취득하실 수 있는 운전면허의 종류입니다</p>
+                </div>
+
+                <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                    <div class="bg-white rounded-xl p-5 border border-fade shadow-subtle">
+                        <div class="w-14 h-14 rounded-full bg-blue-50 flex items-center justify-center mb-4">
+                            <span class="font-bold text-primary text-lg">1종</span>
+                        </div>
+                        <h3 class="font-semibold text-lg mb-2">1종 보통</h3>
+                        <p class="text-sm text-gray-500 mb-3">승용차, 승합차, 화물차 등 운전 가능</p>
+                        <span class="inline-block text-xs bg-blue-50 text-primary px-2 py-1 rounded">실기시험 필수</span>
+                    </div>
+                    <div class="bg-white rounded-xl p-5 border border-fade shadow-subtle">
+                        <div class="w-14 h-14 rounded-full bg-green-50 flex items-center justify-center mb-4">
+                            <span class="font-bold text-success text-lg">2종</span>
+                        </div>
+                        <h3 class="font-semibold text-lg mb-2">2종 보통</h3>
+                        <p class="text-sm text-gray-500 mb-3">승용차, 경형승합차 등 운전 가능</p>
+                        <span class="inline-block text-xs bg-green-50 text-success px-2 py-1 rounded">실기시험 필수</span>
+                    </div>
+                    <div class="bg-white rounded-xl p-5 border border-fade shadow-subtle">
+                        <div class="w-14 h-14 rounded-full bg-orange-50 flex items-center justify-center mb-4">
+                            <span class="font-bold text-warning text-lg">대형</span>
+                        </div>
+                        <h3 class="font-semibold text-lg mb-2">1종 대형</h3>
+                        <p class="text-sm text-gray-500 mb-3">대형승합차, 대형화물차 등 운전 가능</p>
+                        <span class="inline-block text-xs bg-orange-50 text-warning px-2 py-1 rounded">실기시험 필수</span>
+                    </div>
+                    <div class="bg-white rounded-xl p-5 border border-fade shadow-subtle">
+                        <div class="w-14 h-14 rounded-full bg-purple-50 flex items-center justify-center mb-4">
+                            <span class="font-bold text-purple-600 text-lg">특수</span>
+                        </div>
+                        <h3 class="font-semibold text-lg mb-2">특수면허</h3>
+                        <p class="text-sm text-gray-500 mb-3">견인차, 구난차 등 특수차량 운전 가능</p>
+                        <span class="inline-block text-xs bg-purple-50 text-purple-600 px-2 py-1 rounded">실기시험 필수</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 시험 신청 -->
+        <section id="apply" class="py-16">
+            <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-10">
+                    <h2 class="text-2xl font-bold text-secondary mb-3">실기시험 신청</h2>
+                    <p class="text-gray-500">로그인 후 시험 신청이 가능합니다</p>
+                </div>
+
+                <div id="apply-login-alert" class="bg-neutral rounded-xl p-8 text-center border border-fade">
+                    <i class="fa fa-user-lock text-gray-400 text-4xl mb-4"></i>
+                    <p class="text-gray-500 mb-4">시험 신청은 로그인 후 이용하실 수 있습니다</p>
+                    <button onclick="openLoginModal()" class="px-4 py-2 bg-primary text-white rounded-md text-sm">로그인하기</button>
+                </div>
+
+                <div id="apply-form-wrap" class="hidden">
+                    <form id="application-form" class="bg-neutral rounded-xl p-6 border border-fade space-y-5">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">신청자 이름</label>
+                            <input type="text" id="app-name" class="w-full px-4 py-2 border border-gray-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary/50" readonly>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">로블록스 아이디</label>
+                            <input type="text" id="app-roblox" class="w-full px-4 py-2 border border-gray-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary/50" readonly>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">희망 면허 종류</label>
+                            <select id="app-license" class="w-full px-4 py-2 border border-gray-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary/50">
+                                <option value="">선택하세요</option>
+                                <option value="1종보통">1종 보통</option>
+                                <option value="2종보통">2종 보통</option>
+                                <option value="1종대형">1종 대형</option>
+                                <option value="특수면허">특수면허</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">시험 희망일</label>
+                            <input type="date" id="app-date" class="w-full px-4 py-2 border border-gray-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary/50">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">비고(선택사항)</label>
+                            <textarea class="w-full px-4 py-2 border border-gray-200 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-primary/50" rows="3" placeholder="기타 참고사항이 있으시면 적어주세요"></textarea>
+                        </div>
+                        <div class="pt-2 text-right">
+                           
